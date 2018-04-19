@@ -5,14 +5,14 @@ const board = new five.Board({
   io: new raspi()
 })
 
-// const door = require('./sensors/door.js')
-// const garage = require('./sensors/garage.js')
+const door = require('./sensors/door.js')
+const garage = require('./sensors/garage.js')
 
 // console.log('initial server')
 board.on('ready', function() {
   console.log('sensor checking:')
-  // door.initial('GPIO17', 'GPIO18')
-  // garage.initial('GPIO22', 'GPIO23')
+  door.initial('GPIO17', 'GPIO18')
+  garage.initial('GPIO22', 'GPIO23')
 })
 
 module.exports = five
