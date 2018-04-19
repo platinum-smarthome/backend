@@ -1,8 +1,8 @@
 {
-  "name": "backend",
+  "name": "smart-home",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Final project iot smart-home",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,18 +10,18 @@
     "type": "git",
     "url": "git+https://github.com/platinum-smarthome/backend.git"
   },
-  "author": "",
+  "keywords": [
+    "smart-home"
+  ],
+  "author": "Team Smart-Home",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/platinum-smarthome/backend/issues"
   },
   "homepage": "https://github.com/platinum-smarthome/backend#readme",
   "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.2",
-    "cors": "^2.8.4",
-    "dotenv": "^5.0.1",
-    "express": "^4.16.3",
-    "nodemon": "^1.17.3"
+    "firebase": "^4.12.1",
+    "johnny-five": "^0.14.3",
+    "raspi-io": "^8.1.1"
   }
 }

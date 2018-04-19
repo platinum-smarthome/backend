@@ -1,17 +1,30 @@
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const port = process.env.PORT || 3000
-const cors = require('cors')
-
-const index  = require('./routes/index')
-
-app.use(cors())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
-
-app.use('/', index)
-
-app.listen(port, () => {
-  console.log(`App is running on port ${port}`)
+// const firebase = require('./firebase')
+const five = require('johnny-five')
+const raspi = require('raspi-io')
+const board = new five.Board({
+  io: new raspi()
 })
+
+board.on('ready', function() {
+  console.log('board smart-home ready')
+  const buzzerDoor = new five.Led('GPIO17')
+  const sensorDoor = new five.Motion('GPIO18')
+
+  buzzerDoor.stop().off()
+
+  sensorDoor.on('calibrated', function() {
+    console.log('sensor door active...')
+  })
+
+  sensorDoor.on('motionstart', function() {
+    console.log('door alarm active...')
+    buzzerDoor.strobe()
+  })
+
+  sensorDoor.on('motionend', function() {
+    console.log('door alarm not active...')
+    buzzerDoor.stop().off()
+  })
+})
+
+
