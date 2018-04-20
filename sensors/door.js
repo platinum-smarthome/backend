@@ -17,6 +17,7 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
       console.log('sensor door active...')
     } else {
       sensorStatus = false
+      buzzer.stop().off()
       console.log('sensor door not active...')
     }
   }, err => {
