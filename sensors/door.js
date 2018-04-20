@@ -16,8 +16,8 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
       sensorStatus = true
       console.log('sensor door active...')
     } else {
-      sensorStatus = false
       buzzer.stop().off()
+      sensorStatus = false
       console.log('sensor door not active...')
     }
   }, err => {
@@ -28,13 +28,21 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
     if (sensorStatus) {
       console.log('door alarm active...')
       buzzer.strobe()
+      let key = smarthome.child('logs').push().key
+      smarthome.child(`logs/${key}`).set({
+        id: key,
+        title: 'Notification Door alarm',
+        description: 'Door alarm detected object. Please check the picture sent to see more clearly.',
+        imageUrl: '',
+        createdAt: Date.now()
+      })
     }
   })
 
   sensor.on('motionend', function() {
     if (sensorStatus) {
-      console.log('door alarm not active...')
       buzzer.stop().off()
+      console.log('door alarm not active...')
     }
   })
 }
