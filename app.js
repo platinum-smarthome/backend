@@ -7,12 +7,13 @@ const board = new five.Board({
 
 const door = require('./sensors/door.js')
 const garage = require('./sensors/garage.js')
-
+const gas = require('./sensors/gas.js')
 // console.log('initial server')
 board.on('ready', function() {
   console.log('sensor checking:')
   door.initial('GPIO17', 'GPIO18')
   garage.initial('GPIO22', 'GPIO23')
+  // gas.initial('GPIO17', 'GPIO24')
 })
 
 module.exports = five
