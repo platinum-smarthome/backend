@@ -20,8 +20,12 @@
   },
   "homepage": "https://github.com/platinum-smarthome/backend#readme",
   "dependencies": {
+    "app-root-path": "^2.0.1",
+    "cloudinary": "^1.11.0",
+    "dotenv": "^5.0.1",
     "firebase": "^4.12.1",
     "johnny-five": "^0.14.3",
-    "raspi-io": "^8.1.1"
+    "raspi-io": "^8.1.1",
+    "raspicam": "^0.2.14"
   }
 }

@@ -1,6 +1,7 @@
 module.exports.initial = function(pinBuzzer, pinSensor) {
   const smarthome = require('../firebase')
   const five = require('../app')
+  const camera = require('./camera')
   const buzzer = new five.Led(pinBuzzer)
   const sensor = new five.Motion(pinSensor)
 
@@ -27,15 +28,19 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
   sensor.on('motionstart', function() {
     if (sensorStatus) {
       console.log('garage alarm active...')
-      buzzer.strobe()
-      let key = smarthome.child('logs').push().key
-      smarthome.child(`logs/${key}`).set({
-        id: key,
-        title: 'Notification Garage alarm',
-        description: 'Garage alarm detected object. Please check the picture sent to see more clearly.',
-        imageUrl: '',
-        createdAt: Date.now()
+      camera.capture(function(imgUrl) {
+        // console.log('callback camera', imgUrl)
+        let key = smarthome.child('logs').push().key
+        smarthome.child(`logs/${key}`).set({
+          id: key,
+          title: 'Notification garage alarm',
+          description: 'Garage alarm detected object. Please check the picture sent to see more clearly.',
+          imageUrl: imgUrl,
+          createdAt: Date.now()
+        })
       })
+
+      buzzer.strobe()
     }
   })
 
