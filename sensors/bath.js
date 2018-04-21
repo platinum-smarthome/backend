@@ -5,16 +5,16 @@ module.exports.initial = function(pinLED, pinSensor) {
 
   Led.stop().off()
   motion.on('calibrated', function() {
-    console.log('sensor BathRoom calibrated...')
+    console.log('sensor bathRoom calibrated...')
   })
 
   motion.on('motionstart', function() {
     Led.on()
-    console.log('Someone Enter bathroom')
+    console.log('Someone enter bathroom')
   })
 
   motion.on('motionend', function() {
     Led.off().stop()
-    console.log('Someone Go out from bathroom')
+    console.log('Someone go out from bathroom')
   })
 }

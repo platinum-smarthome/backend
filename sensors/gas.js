@@ -4,24 +4,41 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
   const buzzer = new five.Led(pinBuzzer)
   const gasSensor = new five.Sensor.Digital(pinSensor)
 
-  gasSensor.on("change", function() {
-    // console.log('gas sensor on')
-    // console.log(this.value)
-    // console.log(gasSensor)
-    if (this.value === 1) {
-      console.log('gasSensor aman ', this.value)
+  buzzer.stop().off()
+  var sensorStatus = false
+  smarthome.on('value', snapshot => {
+    // console.log(snapshot.val().sensors.gas)
+    if (snapshot.val().sensors.gas === 1) {
+      sensorStatus = true
+      console.log('sensor gas active...')
+    } else {
+      sensorStatus = false
       buzzer.stop().off()
+      console.log('sensor gas not active...')
     }
-    else if (this.value === 0) {
-      console.log('gasSensor bahaya ', this.value)
-      buzzer.on()
-      let key = smarthome.child('logs').push().key
-      smarthome.child(`logs/${key}`).set({
-        id: key,
-        title: 'Notification Gas alarm',
-        description: 'Gas leak detected',
-        createdAt: Date.now()
-      })
+  }, err => {
+    console.error('sensor gas error: ', err)
+  })
+
+  gasSensor.on("change", function() {
+    if (sensorStatus) {
+      if (this.value === 1) {
+        console.log('gas alarm not active...')
+        buzzer.stop().off()
+      }
+      else if (this.value === 0) {
+        console.log('gas alarm active...', this.value)
+        // buzzer.on()
+        let key = smarthome.child('logs').push().key
+        smarthome.child(`logs/${key}`).set({
+          id: key,
+          title: 'Notification Gas alarm',
+          description: 'Gas leak detected.',
+          createdAt: Date.now()
+        })
+
+        buzzer.blink(250)
+      }
     }
   })
 }
