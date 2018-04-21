@@ -9,6 +9,7 @@ const door = require('./sensors/door.js')
 const garage = require('./sensors/garage.js')
 const gas = require('./sensors/gas.js')
 const bath = require('./sensors/bath.js')
+
 // console.log('initial server')
 board.on('ready', function() {
   console.log('sensor checking:')
