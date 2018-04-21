@@ -15,7 +15,7 @@ board.on('ready', function() {
   console.log('sensor checking:')
   door.initial('GPIO17', 'GPIO18')
   garage.initial('GPIO22', 'GPIO23')
-  gas.initial('GPIO17', 'GPIO24')
+  gas.initial('GPIO26', 'GPIO20')
   bath.initial('GPIO16', 'GPIO25')
 })
 
