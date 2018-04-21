@@ -21,14 +21,13 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
   })
 
   gasSensor.on("change", function() {
+    // console.log('sensor status', sensorStatus)
     if (sensorStatus) {
       if (this.value === 1) {
         console.log('gas alarm not active...')
         buzzer.stop().off()
-      }
-      else if (this.value === 0) {
+      } else if (this.value === 0) {
         console.log('gas alarm active...')
-        // buzzer.on()
         let key = smarthome.child('logs').push().key
         smarthome.child(`logs/${key}`).set({
           id: key,
@@ -36,8 +35,9 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
           description: 'Gas leak detected.',
           createdAt: Date.now()
         })
-
-        buzzer.blink(250)
+        
+        buzzer.on()
+        // buzzer.blink(250)
       }
     }
   })
