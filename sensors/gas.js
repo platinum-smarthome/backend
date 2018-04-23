@@ -1,6 +1,7 @@
 module.exports.initial = function (pinBuzzer, pinSensor) {
   const smarthome = require('../firebase')
   const five = require('../app')
+  const sendEmail = require('../sendEmail.js')
   const buzzer = new five.Led(pinBuzzer)
   const gasSensor = new five.Sensor.Digital(pinSensor)
 
@@ -29,12 +30,14 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
       } else if (this.value === 0) {
         console.log('gas alarm active...')
         let key = smarthome.child('logs').push().key
-        smarthome.child(`logs/${key}`).set({
+        let message = {
           id: key,
           title: 'Notification Gas alarm',
           description: 'Gas leak detected.',
           createdAt: Date.now()
-        })
+        }
+	sendEmail(message)
+	smarthome.child(`logs/${key}`).set(message)
         
         buzzer.on()
         // buzzer.blink(250)
