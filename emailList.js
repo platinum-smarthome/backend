@@ -2,7 +2,7 @@
 const smarthome = require('./firebase.js');
 
 const fetchEmails = (callback) => {
-  smarthome.child('/users/').on('value', (snapshot) => {
+  smarthome.child('/users/').once('value', (snapshot) => {
     let val = snapshot.val();
     let emailList = [];
     if(val) {
