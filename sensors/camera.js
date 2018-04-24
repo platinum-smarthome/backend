@@ -37,8 +37,8 @@ module.exports = {
     var camera = new RaspiCam({
       mode: 'video',
       output: fileName,
-      w: 1920,
-      h: 1080,
+      w: 640, //1920,
+      h: 480, //1080,
       t: 5000
     })
 

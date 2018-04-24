@@ -19,7 +19,7 @@ const sendingEmail = (message, emailList) => {
       html: `We detected something in your home <br>
       <b>${message.title}<b><br>
       ${message.description}<br>
-      <img src=${message.imageUrl} alt="image not found or deleted">
+      <img src=${message.imageUrl} alt="">
       `
     }
 

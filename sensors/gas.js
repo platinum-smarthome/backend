@@ -39,8 +39,8 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
           description: 'Gas leak detected.',
           createdAt: Date.now()
         }
-	sendEmail(message)
-	smarthome.child(`logs/${key}`).set(message)
+        sendEmail(message)
+        smarthome.child(`logs/${key}`).set(message)
         
         buzzer.on()
         // buzzer.blink(250)

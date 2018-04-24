@@ -31,16 +31,16 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
       console.log('door alarm active...')
       smarthome.child('alarms/door').set(0)
       camera.capture(function(imgUrl) {
-         console.log('callback camera', imgUrl)
+        // console.log('callback camera', imgUrl)
         let key = smarthome.child('logs').push().key
         let message = {
-	  id: key,
-	  title: 'Notification Door Alarm',
-	  description: 'Dorr alarm detected object. Please check the picture sent to see more clearly',
-	  imageUrl: imageUrl,
-	  createdAt: Date.now()
+          id: key,
+          title: 'Notification Door Alarm',
+          description: 'Door alarm detected object. Please check the picture sent to see more clearly',
+          imageUrl: imgUrl,
+          createdAt: Date.now()
         }
-	sendEmail(message)
+	      sendEmail(message)
         smarthome.child(`logs/${key}`).set(message)
       })
       
