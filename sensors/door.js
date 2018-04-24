@@ -1,5 +1,6 @@
 module.exports.initial = function(pinBuzzer, pinSensor) {
   const smarthome = require('../firebase')
+  const nexmo = require('../nexmo')
   const five = require('../app')
   const camera = require('./camera')
   const sendEmail = require('../sendEmail.js')
@@ -41,6 +42,16 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
         }
 	sendEmail(message)
         smarthome.child(`logs/${key}`).set(message)
+	nexmo.message.sendSms(
+  '085880016822', '+6285880016822', 'alarm door ring',
+    (err, responseData) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.dir(responseData);
+      }
+    }
+ );
       })
       
       buzzer.strobe()      
