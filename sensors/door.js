@@ -43,6 +43,7 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
 	      sendEmail(message)
         smarthome.child(`logs/${key}`).set(message)
       })
+      smarthome.child('alarms/door').set(0)
       
       buzzer.strobe()      
     }

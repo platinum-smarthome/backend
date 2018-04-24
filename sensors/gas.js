@@ -41,6 +41,7 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
         }
         sendEmail(message)
         smarthome.child(`logs/${key}`).set(message)
+        smarthome.child('alarms/gas').set(0)
         
         buzzer.on()
         // buzzer.blink(250)
