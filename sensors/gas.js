@@ -6,6 +6,7 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
 
   buzzer.stop().off()
   var sensorStatus = false
+  console.log('sensor gas calibrated...')
   smarthome.on('value', snapshot => {
     // console.log(snapshot.val().sensors.gas)
     if (snapshot.val().sensors.gas === 1) {
@@ -25,9 +26,11 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
     if (sensorStatus) {
       if (this.value === 1) {
         console.log('gas alarm not active...')
+        smarthome.child('alarms/gas').set(1)
         buzzer.stop().off()
       } else if (this.value === 0) {
         console.log('gas alarm active...')
+        smarthome.child('alarms/gas').set(0)
         let key = smarthome.child('logs').push().key
         smarthome.child(`logs/${key}`).set({
           id: key,

@@ -16,7 +16,7 @@ board.on('ready', function() {
   door.initial('GPIO17', 'GPIO18')
   garage.initial('GPIO22', 'GPIO23')
   gas.initial('GPIO26', 'GPIO20')
-  bath.initial('GPIO16', 'GPIO25')
+  bath.initial('GPIO19', 'GPIO16')
 })
 
 module.exports = five
