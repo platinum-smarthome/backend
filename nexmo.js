@@ -1,7 +1,25 @@
+require('dotenv').config()
 const Nexmo = require('nexmo');
 const nexmo = new Nexmo({
-  apiKey: process.ENV.nexmo_key,
-  apiSecret: process.ENV.nexmo_secret
+  apiKey: '0a8df316',
+  apiSecret: '7pYBjJe1wNqA4BK7'
 });
 
-module.exports = nexmo
+function sendMessage(msg) {
+  nexmo.message.sendSms(
+  'dari mana', '+6285880016822', msg,
+    (err, responseData) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.dir(responseData);
+      }
+    }
+  )
+}
+
+module.exports = {
+  sendMessage,
+}
+
+
