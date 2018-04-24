@@ -2,6 +2,7 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
   const smarthome = require('../firebase')
   const five = require('../app')
   const camera = require('./camera')
+  const sendEmail = require('../sendEmail.js')
   const buzzer = new five.Led(pinBuzzer)
   const sensor = new five.Motion(pinSensor)
 
@@ -30,15 +31,17 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
       console.log('door alarm active...')
       smarthome.child('alarms/door').set(0)
       camera.capture(function(imgUrl) {
-        // console.log('callback camera', imgUrl)
+         console.log('callback camera', imgUrl)
         let key = smarthome.child('logs').push().key
-        smarthome.child(`logs/${key}`).set({
-          id: key,
-          title: 'Notification Door alarm',
-          description: 'Door alarm detected object. Please check the picture sent to see more clearly.',
-          imageUrl: imgUrl,
-          createdAt: Date.now()
-        })
+        let message = {
+	  id: key,
+	  title: 'Notification Door Alarm',
+	  description: 'Dorr alarm detected object. Please check the picture sent to see more clearly',
+	  imageUrl: imageUrl,
+	  createdAt: Date.now()
+        }
+	sendEmail(message)
+        smarthome.child(`logs/${key}`).set(message)
       })
       
       buzzer.strobe()      

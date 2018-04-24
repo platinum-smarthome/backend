@@ -25,7 +25,7 @@
     "dotenv": "^5.0.1",
     "firebase": "^4.12.1",
     "johnny-five": "^0.14.3",
-    "pm2": "^2.10.2",
+    "nodemailer": "^4.6.4",
     "raspi-io": "^8.1.1",
     "raspicam": "^0.2.14"
   }
