@@ -25,7 +25,12 @@
     "dotenv": "^5.0.1",
     "firebase": "^4.12.1",
     "johnny-five": "^0.14.3",
+    "node-wiring-pi": "0.0.4",
+    "nodemailer": "^4.6.4",
     "raspi-io": "^8.1.1",
-    "raspicam": "^0.2.14"
+    "raspicam": "^0.2.14",
+    "stepper-wiringpi": "0.0.2",
+    "wiring-pi": "^2.2.1",
+    "wiringpi-node": "^2.4.4"
   }
 }
