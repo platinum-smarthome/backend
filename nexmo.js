@@ -7,7 +7,7 @@ const nexmo = new Nexmo({
 
 function sendMessage(msg) {
   nexmo.message.sendSms(
-  'dari mana', '+6285880016822', msg,
+  'NEXMO', '+6285880016822', msg,
     (err, responseData) => {
       if (err) {
         console.log(err);
