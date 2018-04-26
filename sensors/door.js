@@ -37,7 +37,7 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
         let message = {
           id: key,
           title: 'Notification Door Alarm',
-          description: 'Dorr alarm detected object. Please check the picture sent to see more clearly',
+          description: 'Door alarm detected object. Please check the picture sent to see more clearly',
           imageUrl: imgUrl,
           createdAt: Date.now()
         }
