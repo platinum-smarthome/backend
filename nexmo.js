@@ -7,7 +7,7 @@ const nexmo = new Nexmo({
 
 function sendMessage(msg) {
   nexmo.message.sendSms(
-  'NEXMO', '+6285880016822', msg,
+  'NEXMO', '+6283890801024', msg,
     (err, responseData) => {
       if (err) {
         console.log(err);

@@ -29,17 +29,17 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
     if (sensorStatus) {
       console.log('garage alarm active...')
       smarthome.child('alarms/garage').set(0)
-      camera.capture(function(imgUrl) {
-        // console.log('callback camera', imgUrl)
-        let key = smarthome.child('logs').push().key
-        smarthome.child(`logs/${key}`).set({
-          id: key,
-          title: 'Notification garage alarm',
-          description: 'Garage alarm detected object. Please check the picture sent to see more clearly.',
-          imageUrl: imgUrl,
-          createdAt: Date.now()
-        })
-      })
+      let imgUrl = ''
+      let key = smarthome.child('logs').push().key
+      let message = {
+        id: key,
+        title: 'Notification Garage Alarm',
+        description: 'Garage alarm detected object.',
+        createdAt: Date.now()
+      }
+      sendEmail(message)
+      smarthome.child(`logs/${key}`).set(message)
+      smarthome.child('alarms/garage').set(0)
 
       buzzer.strobe()
     }
