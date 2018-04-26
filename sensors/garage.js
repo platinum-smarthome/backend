@@ -2,6 +2,7 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
   const smarthome = require('../firebase')
   const five = require('../app')
   const camera = require('./camera')
+  const sendEmail = require('../sendEmail.js')
   const buzzer = new five.Led(pinBuzzer)
   const sensor = new five.Motion(pinSensor)
 
