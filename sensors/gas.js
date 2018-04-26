@@ -26,9 +26,11 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
     if (sensorStatus) {
       if (this.value === 1) {
         console.log('gas alarm not active...')
+        smarthome.child('alarms/gas').set(1)
         buzzer.stop().off()
       } else if (this.value === 0) {
         console.log('gas alarm active...')
+        smarthome.child('alarms/gas').set(0)
         let key = smarthome.child('logs').push().key
         let message = {
           id: key,
@@ -36,9 +38,9 @@ module.exports.initial = function (pinBuzzer, pinSensor) {
           description: 'Gas leak detected.',
           createdAt: Date.now()
         }
-	sendEmail(message)
-	smarthome.child(`logs/${key}`).set(message)
-        
+	      sendEmail(message)
+	      smarthome.child(`logs/${key}`).set(message)
+        smarthome.child('alarms/gas').set(0)
         buzzer.on()
         // buzzer.blink(250)
       }

@@ -28,6 +28,7 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
   sensor.on('motionstart', function() {
     if (sensorStatus) {
       console.log('garage alarm active...')
+      smarthome.child('alarms/garage').set(0)
       camera.capture(function(imgUrl) {
         // console.log('callback camera', imgUrl)
         let key = smarthome.child('logs').push().key
@@ -47,6 +48,7 @@ module.exports.initial = function(pinBuzzer, pinSensor) {
   sensor.on('motionend', function() {
     if (sensorStatus) {
       buzzer.stop().off()
+      smarthome.child('alarms/garage').set(1)
       console.log('garage alarm not active...')
     }
   })
